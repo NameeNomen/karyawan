@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$port="3307";
+$port="3306";
 $pass = "";
 $db   = "db_Karyawan";
 
