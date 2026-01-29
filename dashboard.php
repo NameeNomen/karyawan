@@ -1,9 +1,7 @@
 <?php
-// --- LOGIKA PHP ---
-// Hubungkan ke database
-if (file_exists("../koneksi.php")) {
-    include "../koneksi.php";
-}
+
+    include "koneksi.php";
+
 
 $total_karyawan = 0;
 
@@ -24,7 +22,7 @@ if (isset($conn) && $conn) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Dashboard - Kepegawaian</title>
+    <title> Dashboard Kepegawaian  - Tri jaya teknik karawang</title>
     
     <!-- FONT POPPINS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,19 +129,20 @@ if (isset($conn) && $conn) {
         <!-- Header Minimalis -->
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-12 gap-4 md:gap-0">
             <div class="flex items-center gap-3 w-full md:w-auto">
-                <div class="w-10 h-10 bg-gradient-to-tr from-emerald-400 to-teal-400 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-200 text-white shrink-0">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3"></path><path d="M15 1v3"></path><path d="M9 20v3"></path><path d="M15 20v3"></path><path d="M20 9h3"></path><path d="M20 14h3"></path><path d="M1 9h3"></path><path d="M1 14h3"></path></svg>
+                <div class="w-50 h-50  rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-200 text-white shrink-0">
+                    <!-- <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 1v3"></path><path d="M15 1v3"></path><path d="M9 20v3"></path><path d="M15 20v3"></path><path d="M20 9h3"></path><path d="M20 14h3"></path><path d="M1 9h3"></path><path d="M1 14h3"></path></svg> -->
+                     <img src="image/logotrijaya.png" alt="" width="200px">
                 </div>
                 <span class="font-bold text-xl tracking-wide text-gray-700 truncate">
-                    Sistem <span class="text-emerald-500">Kepegawaian</span>
+                    Dashboard Kepegawaian  -<span class="text-emerald-500"> Tri jaya teknik karawang</span>
                 </span>
             </div>
             
-            <div class="flex gap-4 w-full md:w-auto justify-end">
+            <!-- <div class="flex gap-4 w-full md:w-auto justify-end">
                  <button class="w-10 h-10 rounded-full bg-white p-[2px] shadow-sm hover:shadow-md transition-shadow">
                     <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User" class="w-full h-full rounded-full bg-emerald-50">
                  </button>
-            </div>
+            </div> -->
         </header>
 
         <!-- BENTO GRID LAYOUT -->
@@ -221,7 +220,7 @@ if (isset($conn) && $conn) {
             -->
             
             <!-- 3. TAMBAH PEGAWAI (Soft Emerald) -->
-            <a href="../page/karyawan/registrasi.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-emerald-100/80 hover:bg-emerald-200/90 gap-4">
+            <a href="page/karyawan/registrasi.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-emerald-100/80 hover:bg-emerald-200/90 gap-4">
                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/60 md:mb-4 flex items-center justify-center text-emerald-600 shadow-sm group-hover:scale-110 group-hover:bg-white group-hover:text-emerald-700 transition-all duration-300 shrink-0">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </div>
@@ -236,7 +235,7 @@ if (isset($conn) && $conn) {
             </a>
 
             <!-- 4. TAMBAH DIVISI (Soft Teal) -->
-            <a href="../page/departement/tambah.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-teal-100/80 hover:bg-teal-200/90 gap-4">
+            <a href="page/departement/tambah.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-teal-100/80 hover:bg-teal-200/90 gap-4">
                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/60 md:mb-4 flex items-center justify-center text-teal-600 shadow-sm group-hover:scale-110 group-hover:bg-white group-hover:text-teal-700 transition-all duration-300 shrink-0">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><line x1="3" y1="14" x2="10" y2="14"></line><line x1="6.5" y1="11" x2="6.5" y2="17"></line></svg>
                 </div>
@@ -250,7 +249,7 @@ if (isset($conn) && $conn) {
             </a>
 
             <!-- 5. TAMBAH JABATAN (Soft Sky) -->
-            <a href="../page/jabatan/tambah.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-sky-100/80 hover:bg-sky-200/90 gap-4">
+            <a href="page/jabatan/tambah.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-sky-100/80 hover:bg-sky-200/90 gap-4">
                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/60 md:mb-4 flex items-center justify-center text-sky-600 shadow-sm group-hover:scale-110 group-hover:bg-white group-hover:text-sky-700 transition-all duration-300 shrink-0">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 11v6"></path><path d="M9 14h6"></path><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                 </div>
@@ -267,7 +266,7 @@ if (isset($conn) && $conn) {
             <!-- GROUP: LIST DATA (PASTEL COLORS) -->
 
             <!-- 6. DATA PEGAWAI (Soft Lime) -->
-            <a href="../page/karyawan/list.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-lime-100/80 hover:bg-lime-200/90 gap-4">
+            <a href="page/karyawan/list.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-lime-100/80 hover:bg-lime-200/90 gap-4">
                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/60 md:mb-4 flex items-center justify-center text-lime-700 shadow-sm group-hover:scale-110 group-hover:bg-white group-hover:text-lime-800 transition-all duration-300 shrink-0">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 </div>
@@ -281,7 +280,7 @@ if (isset($conn) && $conn) {
             </a>
 
             <!-- 7. LIST DIVISI (Soft Cyan) -->
-            <a href="../page/departement/list.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-cyan-100/80 hover:bg-cyan-200/90 gap-4">
+            <a href="page/departement/list.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-cyan-100/80 hover:bg-cyan-200/90 gap-4">
                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/60 md:mb-4 flex items-center justify-center text-cyan-600 shadow-sm group-hover:scale-110 group-hover:bg-white group-hover:text-cyan-700 transition-all duration-300 shrink-0">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><path d="M12 14v-4"></path><path d="M12 6h.01"></path></svg>
                 </div>
@@ -295,7 +294,7 @@ if (isset($conn) && $conn) {
             </a>
 
             <!-- 8. LIST JABATAN (Soft Green) -->
-            <a href="../page/jabatan/list.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-green-100/80 hover:bg-green-200/90 gap-4">
+            <a href="page/jabatan/list.php" class="pastel-card col-span-12 sm:col-span-6 lg:col-span-4 p-4 md:p-6 h-auto lg:h-48 flex flex-row lg:flex-col justify-start lg:justify-center items-center text-left lg:text-center group bg-green-100/80 hover:bg-green-200/90 gap-4">
                 <div class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/60 md:mb-4 flex items-center justify-center text-green-600 shadow-sm group-hover:scale-110 group-hover:bg-white group-hover:text-green-700 transition-all duration-300 shrink-0">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                 </div>

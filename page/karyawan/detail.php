@@ -1,22 +1,6 @@
 <?php
 include "../../koneksi.php";
-$data = mysqli_query ($conn, "SELECT  k.id_karyawan, 
-k.nama_lengkap,
-k.email,
-k.nik,
-k.alamat,
-k.no_hp,
-k.jenis_kelamin,
-k.tempat_lahir,
-k.tanggal_lahir,
-k.foto_selfie,
-k.photo_ktp,
-j.nama_jabatan,
-d.nama_departement
-FROM karyawan k
-JOIN jabatan j on k.id_jabatan = j.id_jabatan
-JoIN departement d on k.id_departement = d.id_departement;
-");
+include "controller/detailController.php";
 
 ?>
 <!DOCTYPE html>
@@ -187,8 +171,8 @@ JoIN departement d on k.id_departement = d.id_departement;
         }
 
         .logo-img {
-            width: 50px; /* Ukuran logo lebih proporsional */
-            height: 50px;
+            width: 40px; /* Ukuran logo lebih proporsional */
+            height: 40px;
             object-fit: contain;
         }
         
@@ -196,7 +180,7 @@ JoIN departement d on k.id_departement = d.id_departement;
         .logo-text {
             font-weight: 700;
             color: #1b5e20;
-            font-size: 1rem;
+            font-size:8px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
         }
@@ -336,8 +320,10 @@ JoIN departement d on k.id_departement = d.id_departement;
                     </div>
                     
                     <div class="id-badge">
-                        <span>ID CARD NO.</span>
+                        <span>ID STAFF.</span>
+                        <CENTER>
                         <?= htmlspecialchars($row['id_karyawan']); ?>
+                        </CENTER>
                     </div>
                 </div>
 
