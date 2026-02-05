@@ -1,9 +1,9 @@
 <?php
 $host = "localhost";
 $user = "root";
-$port="3307";
+$port="3306";
 $pass = "";
-$db   = "db_Karyawan";
+$db   = "db_karyawan";
 
 $conn = mysqli_connect($host, $user, $pass, $db, $port);
 
