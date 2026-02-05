@@ -1,8 +1,10 @@
 <?php
 include "../../koneksi.php";
 
+$cari = isset($_GET['search'])? $_GET['search']:'';
 
-$data = mysqli_query ($conn, "SELECT  k.id_karyawan, 
+
+$data =  "SELECT  k.id_karyawan, 
 k.nama_lengkap,
 k.email,
 k.nik,
@@ -17,8 +19,15 @@ j.nama_jabatan,
 d.nama_departement
 FROM karyawan k
 JOIN jabatan j on k.id_jabatan = j.id_jabatan
-JoIN departement d on k.id_departement = d.id_departement;
-");
+JoIN departement d on k.id_departement = d.id_departement";
+
+
+if ($cari !='') {
+    $cari = mysqli_real_escape_string($conn,$cari);
+      $data .= " WHERE k.nama_lengkap LIKE '%$cari%'";
+}
+$hasil = mysqli_query($conn,$data);
+
 
 
 ?>

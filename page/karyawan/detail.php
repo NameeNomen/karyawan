@@ -1,26 +1,33 @@
 <?php
 include "../../koneksi.php";
 include "controller/detailController.php";
-
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Karyawan - Premium Landscape</title>
+    <title>ID Card Premium - Professional Green</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <!-- Libraries -->
+    <!-- html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
-        /* Reset & Base Styles */
+        :root {
+            --primary-green: #0a2e0c; /* Ijo alas ingkang langkung jero */
+            --accent-green: #2e7d32;  
+            --gold-accent: #d4af37;   /* Warna emas supados langkung méwah */
+            --yellow-icon: #f1c40f;   
+            --text-light: #ffffff;
+            --bg-gray: #f4f7f6;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -29,9 +36,8 @@ include "controller/detailController.php";
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #e8f5e9;
+            background-color: var(--bg-gray);
             padding: 40px 20px;
-            color: #333;
         }
 
         .no-print {
@@ -39,252 +45,228 @@ include "controller/detailController.php";
             margin-bottom: 40px;
         }
 
-        /* Container Grid */
         .card-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 40px;
+            gap: 50px;
             justify-content: center;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        /* --- DESAIN ID CARD MODERN LANDSCAPE --- */
+        /* --- DESAIN ID CARD (LANDSCAPE) --- */
         .id-card {
-            width: 500px;
-            height: 300px;
+            width: 600px;
+            height: 350px;
             background: #fff;
-            border-radius: 15px;
+            border-radius: 8px; 
             overflow: hidden; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
             position: relative;
             display: flex;
-            transition: transform 0.3s ease;
         }
 
-        .id-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(27, 94, 32, 0.2);
-        }
-
-        /* Sisi Kiri (Hijau - Foto & ID) */
-        .left-section {
-            width: 40%;
-            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+        /* Sidebar Kiri (Upgrade: Gradient & Texture) */
+        .sidebar {
+            width: 38%;
+            background: linear-gradient(135deg, #0a2e0c 0%, #1b5e20 100%);
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            z-index: 10;
+            padding: 60px 25px;
             color: white;
-            z-index: 2;
+            clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+            border-right: 4px solid var(--gold-accent);
         }
 
-        /* Pattern Geometris Samar di Background Hijau */
-        .left-section::before {
+        /* Pola geometris ingkang langkung mentes */
+        .sidebar::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 10px 10px;
-            opacity: 0.5;
+            z-index: -1;
         }
 
-        /* Elemen Dekoratif Miring (Slant) */
-        .left-section::after {
+        /* Aksen sorot alus (Glossy effect) */
+        .sidebar::after {
             content: '';
             position: absolute;
-            top: 0;
-            right: -30px; /* Overlap ke bagian putih */
-            width: 60px;
-            height: 100%;
-            background: inherit;
-            transform: skewX(-10deg);
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
             z-index: -1;
-            border-right: 5px solid rgba(255,255,255,0.2);
         }
 
-        /* Foto Profil */
-        .photo-container {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            padding: 4px;
-            background: rgba(255,255,255,0.2);
-            margin-bottom: 15px;
+        /* Main Content Kanan */
+        .main-content {
+            width: 62%;
+            margin-left: -5%; 
             position: relative;
-            z-index: 2;
+            background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
         }
 
-        .profile-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 3px solid #fff;
-            background-color: #fff;
-        }
-
-        /* ID Number di Bawah Foto */
-        .id-badge {
-            background: rgba(0,0,0,0.2);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .id-badge span {
-            display: block;
-            font-size: 0.6rem;
-            opacity: 0.8;
-            text-align: center;
-            margin-bottom: 2px;
-        }
-
-        /* Sisi Kanan (Putih - Info Teks) */
-        .right-section {
-            flex: 1;
-            padding: 25px 30px 45px 50px; /* Padding bawah ditambah untuk alamat */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-        }
-
-        /* Header Logo Kanan Atas - DIPERBAIKI */
-        .header-logo {
+        .main-content::before {
+            content: '';
             position: absolute;
-            top: 25px; /* Posisi lebih pas di dalam kartu */
-            right: 25px;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.98) 15%, rgba(27, 94, 32, 0.05) 100%);
+        }
+
+        /* Header Logo */
+        .company-header {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 20;
             display: flex;
             align-items: center;
             gap: 10px;
-            z-index: 10;
         }
 
-        .logo-img {
-            width: 40px; /* Ukuran logo lebih proporsional */
-            height: 40px;
-            object-fit: contain;
+        .company-logo-icon {
+            color: var(--primary-green);
+            font-size: 26px;
         }
-        
-        
-        .logo-text {
-            font-weight: 700;
-            color: #1b5e20;
-            font-size:8px;
-            letter-spacing: 0.5px;
+
+        .company-name {
+            font-weight: 800;
+            color: var(--primary-green);
+            font-size: 14px;
             text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
 
-        /* Info Utama */
-        .info-block {
-            margin-top: 10px;
-            z-index: 5;
+        /* List Kontak ing Sidebar */
+        .contact-list {
+            margin-top: 40px;
+            list-style: none;
         }
 
-        .emp-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #222;
-            text-transform: uppercase;
-            line-height: 1.2;
-            margin-bottom: 5px;
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 30px;
         }
 
-        .emp-role {
-            font-size: 0.9rem;
-            color: #2e7d32;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-            display: inline-block;
-            border-bottom: 2px solid #a5d6a7;
-            padding-bottom: 3px;
-        }
-
-        /* Detail Grid */
-        .detail-row {
+        .icon-circle {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--gold-accent), var(--yellow-icon));
+            border-radius: 6px; /* Kotak sithik luwih modern tinimbang bunder */
             display: flex;
             align-items: center;
-            margin-bottom: 6px;
-            font-size: 0.8rem;
-            color: #555;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .detail-row i {
-            width: 20px;
-            color: #81c784;
-            margin-right: 8px;
+        .icon-circle i {
+            color: #000;
+            font-size: 14px;
         }
-        
-        .detail-label {
+
+        .contact-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-label {
+            font-size: 8px;
+            font-weight: 800;
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 2px;
+        }
+
+        .contact-val {
+            font-size: 10px;
             font-weight: 600;
-            margin-right: 5px;
-            color: #444;
+            line-height: 1.4;
+            color: #ffffff;
         }
 
-        /* Alamat di Bawah */
-        .card-address {
+        /* Foto Profil */
+        .profile-wrapper {
             position: absolute;
-            bottom: 15px;
-            left: 50px; /* Sejajar dengan konten teks */
-            font-size: 0.65rem;
-            color: #777;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            z-index: 5;
-            max-width: 90%;
-            line-height: 1.2;
+            top: 48%;
+            right: 45px;
+            transform: translateY(-50%);
+            z-index: 30;
         }
 
-        .card-address i {
-            color: #2e7d32;
-            font-size: 0.8rem;
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid #fff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            background-color: #fff;
         }
 
-        /* Footer Dekoratif Kanan Bawah */
-        .card-footer-decor {
+        /* Name Tag Bawah */
+        .name-tag {
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, transparent 50%, #e8f5e9 50%);
-            border-bottom-right-radius: 15px;
-            z-index: 1;
+            width: 78%;
+            background: var(--primary-green);
+            padding: 25px 45px;
+            color: white;
+            clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 40;
+            border-top: 2px solid var(--gold-accent);
+        }
+
+        .emp-name {
+            font-size: 26px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+        }
+
+        .emp-name span {
+            color: var(--gold-accent); 
+        }
+
+        .emp-role {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #a5d6a7;
+            margin-top: 5px;
+            opacity: 0.9;
         }
 
         /* Tombol Download */
         .btn-download {
-            background-color: #2e7d32;
+            background: linear-gradient(135deg, var(--primary-green), #0d3d11);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 18px 50px;
             border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.9rem;
+            font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(27, 94, 32, 0.3);
+            text-transform: uppercase;
             transition: all 0.3s;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
         }
         
         .btn-download:hover {
-            background-color: #1b5e20;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
     </style>
@@ -292,15 +274,14 @@ include "controller/detailController.php";
 <body>
 
     <div class="no-print">
-        <h2 style="color: #1b5e20; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">ID Card Generator</h2>
         <button onclick="downloadAllCards()" class="btn-download">
-            <i class="fas fa-download"></i> Download Semua (JPG)
+            <i class="fas fa-id-card-alt"></i> Simpen ID Card (Kualitas HD)
         </button>
     </div>
 
     <div class="card-container">
         <?php 
-        // Note: Pastikan $data dari database sudah tersedia
+        // Mesthekake data saking database sampun wonten
         if (isset($data) && mysqli_num_rows($data) > 0) {
             $i = 0;
             while ($row = mysqli_fetch_assoc($data)) { 
@@ -310,73 +291,62 @@ include "controller/detailController.php";
             <!-- ID CARD START -->
             <div class="id-card" id="<?= $cardID; ?>">
                 
-                <!-- SISI KIRI (HIJAU) -->
-                <div class="left-section">
-                    <div class="photo-container">
+                <!-- SIDEBAR KIRI (Upgrade: Kelas & Tekstur) -->
+                <div class="sidebar">
+                    <ul class="contact-list">
+                        <!-- Nomer Telpon -->
+                        <li class="contact-item">
+                            <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-text">
+                                <span class="contact-label">Nomer Telpon</span>
+                                <span class="contact-val"><?= htmlspecialchars($row['no_hp']); ?></span>
+                            </div>
+                        </li>
+                        <!-- Alamat Perusahaan -->
+                        <li class="contact-item">
+                            <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-text">
+                                <span class="contact-label">Alamat Kantor</span>
+                                <span class="contact-val">JL. KRAJAN II, WARUNG BAMBU<br>KARAWANG TIMUR, JAWA BARAT</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- MAIN CONTENT KANAN -->
+                <div class="main-content">
+                    <!-- Header -->
+                    <div class="company-header">
+                        <div class="company-logo-icon"><i class="fas fa-crown"></i></div>
+                        <div class="company-name">TRIJAYA <span style="color: #616161; font-weight: 400;">TEKNIK</span></div>
+                    </div>
+
+                    <!-- Foto Profil -->
+                    <div class="profile-wrapper">
                         <img src="../../upload/<?= htmlspecialchars($row['foto_selfie']); ?>" 
                              class="profile-img" 
                              crossorigin="anonymous"
-                             onerror="this.src='https://via.placeholder.com/200?text=FOTO'">
-                    </div>
-                    
-                    <div class="id-badge">
-                        <span>ID STAFF.</span>
-                        <CENTER>
-                        <?= htmlspecialchars($row['id_karyawan']); ?>
-                        </CENTER>
-                    </div>
-                </div>
-
-                <!-- SISI KANAN (PUTIH) -->
-                <div class="right-section">
-                    
-                    <!-- Logo Perusahaan -->
-                    <div class="header-logo">
-                        <!-- <img src="../../image/logotrijaya.png" class="logo-img" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2970/2970079.png'"> -->
-                        <div class="logo-text">Tri Jaya Teknik Karawang</div>
+                             onerror="this.src='https://ui-avatars.com/api/?name=<?= urlencode($row['nama_lengkap']); ?>&size=300&background=0a2e0c&color=fff'">
                     </div>
 
-                    <!-- Info Utama -->
-                    <div class="info-block">
-                        <div class="emp-name"><?= htmlspecialchars($row['nama_lengkap']); ?></div>
+                    <!-- Tag Jeneng & Jabatan -->
+                    <div class="name-tag">
+                        <?php 
+                            $nameParts = explode(' ', $row['nama_lengkap'], 2);
+                            $firstName = $nameParts[0];
+                            $lastName = isset($nameParts[1]) ? $nameParts[1] : '';
+                        ?>
+                        <div class="emp-name"><?= htmlspecialchars($firstName); ?> <span><?= htmlspecialchars($lastName); ?></span></div>
                         <div class="emp-role"><?= htmlspecialchars($row['nama_jabatan']); ?></div>
-                        
-                        <!-- Detail Info -->
-                        <div class="detail-row">
-                            <i class="fas fa-building"></i>
-                            <div>
-                                <span class="detail-label">Dept:</span>
-                                <?= htmlspecialchars($row['nama_departement']); ?>
-                            </div>
-                        </div>
-                        <div class="detail-row">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <span class="detail-label">Phone:</span>
-                                <?= htmlspecialchars($row['no_hp']); ?>
-                            </div>
-                        </div>
                     </div>
-
-                    <!-- Alamat Bawah -->
-                    <div class="card-address">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Jl. Alternatif Krajan II, Warung Bambu, Kabupaten Karawang</span>
-                    </div>
-
-                    <!-- Dekorasi Sudut -->
-                    <div class="card-footer-decor"></div>
                 </div>
 
             </div>
             <!-- ID CARD END -->
         <?php 
-            } // End While
+            } 
         } else {
-             echo '<div style="text-align:center; width:100%; color:#888;">
-                    <i class="fas fa-inbox" style="font-size:3rem; margin-bottom:10px;"></i>
-                    <p>Tidak ada data karyawan ditemukan.</p>
-                   </div>';
+             echo '<div style="width:100%; text-align:center; padding:50px; color:#999; font-weight:600;">Data mboten kapanggih.</div>';
         }
         ?>
     </div>
@@ -384,15 +354,7 @@ include "controller/detailController.php";
     <script>
         async function downloadAllCards() {
             const cards = document.querySelectorAll('.id-card');
-            
-            if(cards.length === 0) {
-                alert("Tidak ada kartu untuk didownload");
-                return;
-            }
-
-            if(cards.length > 5) {
-                if(!confirm(`Ada ${cards.length} kartu. Lanjutkan download?`)) return;
-            }
+            if(cards.length === 0) return;
 
             for (let i = 0; i < cards.length; i++) {
                 const card = cards[i];
@@ -401,22 +363,22 @@ include "controller/detailController.php";
                 
                 try {
                     const canvas = await html2canvas(card, {
-                        scale: 2, // Resolusi tinggi
+                        scale: 4, // Kualitas langkung tajem
                         useCORS: true,
-                        backgroundColor: null // Transparan agar sudut rounded terambil rapi
+                        allowTaint: true,
+                        backgroundColor: "#ffffff"
                     });
                     
                     const link = document.createElement('a');
                     link.download = `IDCard_${name}.jpg`;
-                    link.href = canvas.toDataURL("image/jpeg", 0.9);
+                    link.href = canvas.toDataURL("image/jpeg", 1.0);
                     link.click();
                     
-                    await new Promise(r => setTimeout(r, 300));
+                    await new Promise(r => setTimeout(r, 700));
                 } catch (err) {
-                    console.error("Gagal download kartu " + name, err);
+                    console.error("Gagal export:", err);
                 }
             }
-            alert("Selesai!");
         }
     </script>
 </body>
