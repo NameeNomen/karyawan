@@ -10,12 +10,14 @@ include "controller/editController.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Pegawai</title>
     
-    <!-- FONT POPPINS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -24,7 +26,16 @@ include "controller/editController.php";
                 extend: {
                     fontFamily: { sans: ['"Poppins"', 'sans-serif'] },
                     colors: {
-                        emerald: { 50: '#f4fcf8', 100: '#e3f0e9', 200: '#c2e0d3', 500: '#10b981', 600: '#059669', 800: '#065f46', 900: '#022c22' }
+                        // Custom Palette untuk konsistensi Pastel & Border Tua
+                        pastel: {
+                            bg: '#ecfdf5',      // Latar belakang halaman
+                            card: '#fafffd',    // Latar belakang kartu (hampir putih)
+                            input: '#ffffff',   // Latar input
+                            border: '#6ee7b7',  // Border input normal (lebih tua dari input)
+                            focus: '#059669',   // Border saat fokus (tua)
+                            text: '#064e3b',    // Teks utama
+                            label: '#047857'    // Teks label
+                        }
                     }
                 }
             }
@@ -32,214 +43,239 @@ include "controller/editController.php";
     </script>
 
     <style>
-        .glass-card {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 20px 40px -5px rgba(16, 185, 129, 0.05);
+        /* Pola Grid Estetik Formal */
+        .bg-pattern {
+            background-color: #f0fdf4; /* Emerald 50 */
+            background-image: linear-gradient(#d1fae5 1px, transparent 1px), linear-gradient(90deg, #d1fae5 1px, transparent 1px);
+            background-size: 24px 24px; /* Ukuran kotak grid */
         }
-        /* Style untuk File Input */
+
+        /* Styling Input File Custom */
         input[type="file"]::file-selector-button {
             margin-right: 16px;
-            padding: 6px 16px;
-            border: none;
-            background-color: #ecfdf5;
-            color: #047857;
+            padding: 8px 16px;
+            border: 1px solid #34d399; /* Border lebih tua */
+            background-color: #ecfdf5; /* Background pastel */
+            color: #065f46;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 500;
-            font-size: 13px;
-            transition: background .2s;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all .2s;
         }
         input[type="file"]::file-selector-button:hover {
             background-color: #d1fae5;
+            border-color: #10b981;
+        }
+        
+        /* Haluskan transisi input */
+        .form-input {
+            transition: all 0.2s ease-in-out;
         }
     </style>
 </head>
-<body class="bg-[#f4fcf8] text-gray-800 min-h-screen relative selection:bg-emerald-200 selection:text-emerald-900 overflow-x-hidden">
+<body class="bg-pattern min-h-screen text-gray-800 font-sans selection:bg-emerald-200 selection:text-emerald-900 pb-12">
 
-    <!-- Background Ambience -->
-    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-        <div class="absolute top-[-10%] left-[-5%] w-[50%] h-[50%] bg-emerald-100/60 rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-teal-100/60 rounded-full blur-[100px]"></div>
-    </div>
-
-    <div class="relative z-10 max-w-4xl mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto px-6 pt-10">
         
-        <!-- HEADER -->
-        <div class="flex items-center gap-4 mb-8">
-            <a href="list.php" class="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-emerald-100 text-emerald-600 hover:bg-emerald-50 transition-colors shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center gap-5 mb-8">
+            <a href="list.php" class="group w-10 h-10 flex items-center justify-center rounded-xl bg-white border border-emerald-300 text-emerald-600 hover:bg-emerald-600 hover:text-white hover:border-emerald-700 transition-all shadow-sm">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
             </a>
             <div>
-                <h1 class="text-2xl font-bold text-emerald-900">Edit Data Pegawai</h1>
-                <p class="text-sm text-emerald-700/60">Perbarui informasi personal dan jabatan pegawai.</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-emerald-900 tracking-tight">Edit Data Pegawai</h1>
+                <p class="text-sm text-emerald-600 font-medium mt-1">Formulir pembaruan data sistem kepegawaian.</p>
             </div>
         </div>
 
-        <!-- FORM CARD -->
-        <div class="glass-card rounded-3xl p-8 md:p-10">
+        <div class="bg-pastel-card rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-emerald-200 p-8 md:p-10 relative overflow-hidden">
+            
+            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-50 rounded-bl-full -z-10"></div>
+
             <form method="post" enctype="multipart/form-data">
                 
-                <!-- Section: Informasi Pribadi -->
-                <h3 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-6 border-b border-emerald-100 pb-2">Informasi Pribadi</h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <!-- Nama Lengkap -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Nama Lengkap</label>
-                        <input type="text" name="nama_lengkap" value="<?= $row['nama_lengkap']; ?>" 
-                               class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700 placeholder-gray-300">
+                <div class="mb-8">
+                    <div class="flex items-center gap-3 mb-6 border-b border-emerald-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                        </div>
+                        <h3 class="text-md font-bold text-emerald-800 uppercase tracking-wider">Informasi Pribadi</h3>
                     </div>
 
-                    <!-- Email -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Email</label>
-                        <input type="email" name="email" value="<?= $row['email']; ?>" 
-                               class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700">
-                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+                        <div class="col-span-1 md:col-span-1">
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Nama Lengkap</label>
+                            <input type="text" name="nama_lengkap" value="<?= $row['nama_lengkap']; ?>" 
+                                   class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 placeholder-emerald-200 shadow-sm">
+                        </div>
 
-                    <!-- NIK -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">NIK</label>
-                        <input type="text" name="nik" value="<?= $row['nik']; ?>" 
-                               class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700 font-mono">
-                    </div>
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Email</label>
+                            <input type="email" name="email" value="<?= $row['email']; ?>" 
+                                   class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 shadow-sm">
+                        </div>
 
-                    <!-- No HP -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">No. Handphone</label>
-                        <input type="text" name="no_hp" value="<?= $row['no_hp']; ?>" 
-                               class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700">
-                    </div>
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Nomor Induk (NIK)</label>
+                            <input type="text" name="nik" value="<?= $row['nik']; ?>" 
+                                   class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 font-mono shadow-sm">
+                        </div>
 
-                    <!-- Tempat Lahir -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" value="<?= $row['tempat_lahir']; ?>" 
-                               class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700">
-                    </div>
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">No. Handphone</label>
+                            <input type="text" name="no_hp" value="<?= $row['no_hp']; ?>" 
+                                   class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 shadow-sm">
+                        </div>
 
-                    <!-- Tanggal Lahir -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Tanggal Lahir</label>
-                        <input type="date" name="tanggal_lahir" value="<?= $row['tanggal_lahir']; ?>" 
-                               class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700">
-                    </div>
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Tempat Lahir</label>
+                            <input type="text" name="tempat_lahir" value="<?= $row['tempat_lahir']; ?>" 
+                                   class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 shadow-sm">
+                        </div>
 
-                    <!-- Jenis Kelamin -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Jenis Kelamin</label>
-                        <div class="relative">
-                            <select name="jenis_kelamin" class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700 appearance-none">
-                                <option value="L" <?= ($row['jenis_kelamin'] == 'L') ? 'selected' : ''; ?>>Laki-Laki</option>
-                                <option value="P" <?= ($row['jenis_kelamin'] == 'P') ? 'selected' : ''; ?>>Perempuan</option>
-                            </select>
-                            <!-- Chevron Icon -->
-                            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Tanggal Lahir</label>
+                            <input type="date" name="tanggal_lahir" value="<?= $row['tanggal_lahir']; ?>" 
+                                   class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 shadow-sm">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Jenis Kelamin</label>
+                            <div class="relative">
+                                <select name="jenis_kelamin" class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 appearance-none shadow-sm cursor-pointer">
+                                    <option value="L" <?= ($row['jenis_kelamin'] == 'L') ? 'selected' : ''; ?>>Laki-Laki</option>
+                                    <option value="P" <?= ($row['jenis_kelamin'] == 'P') ? 'selected' : ''; ?>>Perempuan</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-emerald-500">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Alamat (Full Width) -->
-                    <div class="md:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Alamat Lengkap</label>
-                        <textarea name="alamat" rows="3" class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700"><?= $row['alamat']; ?></textarea>
-                    </div>
-                </div>
-
-                <!-- Section: Kepegawaian -->
-                <h3 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-6 border-b border-emerald-100 pb-2 pt-4">Data Kepegawaian</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <!-- Departemen -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Departemen / Divisi</label>
-                        <div class="relative">
-                            <select name="id_departement" class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700 appearance-none">
-                                <?php
-                                $q = mysqli_query($conn, "SELECT id_departement, nama_departement FROM departement");
-                                while ($d = mysqli_fetch_assoc($q)) {
-                                    $selected = ($d['id_departement'] == $row['id_departement']) ? 'selected' : '';
-                                    echo "<option value='{$d['id_departement']}' $selected>{$d['nama_departement']}</option>";
-                                }
-                                ?>
-                            </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Jabatan -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Jabatan</label>
-                        <div class="relative">
-                            <select name="id_jabatan" class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700 appearance-none">
-                                <?php
-                                $q = mysqli_query($conn, "SELECT id_jabatan, nama_jabatan FROM jabatan");
-                                while ($j = mysqli_fetch_assoc($q)) {
-                                    $selected = ($j['id_jabatan'] == $row['id_jabatan']) ? 'selected' : '';
-                                    echo "<option value='{$j['id_jabatan']}' $selected>{$j['nama_jabatan']}</option>";
-                                }
-                                ?>
-                            </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Status -->
-                    <div>
-                        <label class="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Status Pegawai</label>
-                        <div class="relative">
-                            <select name="status" class="w-full px-4 py-3 rounded-xl bg-white border border-emerald-100 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 outline-none transition-all text-sm font-medium text-gray-700 appearance-none">
-                                <option value="aktif" <?= ($row['status'] == 'aktif') ? 'selected' : ''; ?>>Aktif</option>
-                                <option value="nonaktif" <?= ($row['status'] == 'nonaktif') ? 'selected' : ''; ?>>Non-Aktif</option>
-                            </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-400">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-                            </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Alamat Lengkap</label>
+                            <textarea name="alamat" rows="2" class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 shadow-sm resize-none"><?= $row['alamat']; ?></textarea>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section: Dokumen Foto -->
-                <h3 class="text-sm font-bold text-emerald-800 uppercase tracking-wider mb-6 border-b border-emerald-100 pb-2 pt-4">Dokumen Foto</h3>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-                    <!-- Foto KTP -->
-                    <div class="bg-white p-4 rounded-xl border border-emerald-50">
-                        <label class="block text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wide">Foto KTP</label>
-                        <input type="file" name="photo_ktp" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 transition-all"/>
-                        <?php if(!empty($row['photo_ktp'])): ?>
-                            <p class="text-xs text-gray-400 mt-2 italic">File saat ini: <?= $row['photo_ktp']; ?></p>
-                        <?php endif; ?>
+                <div class="mb-8">
+                    <div class="flex items-center gap-3 mb-6 border-b border-emerald-100 pb-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                        </div>
+                        <h3 class="text-md font-bold text-emerald-800 uppercase tracking-wider">Data Kepegawaian</h3>
                     </div>
 
-                    <!-- Foto Selfie -->
-                    <div class="bg-white p-4 rounded-xl border border-emerald-50">
-                        <label class="block text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wide">Foto Selfie / Profil</label>
-                        <input type="file" name="foto_selfie" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 transition-all"/>
-                        <?php if(!empty($row['foto_selfie'])): ?>
-                            <p class="text-xs text-gray-400 mt-2 italic">File saat ini: <?= $row['foto_selfie']; ?></p>
-                        <?php endif; ?>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Departemen</label>
+                            <div class="relative">
+                                <select name="id_departement" class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 appearance-none shadow-sm cursor-pointer">
+                                    <?php
+                                    $q = mysqli_query($conn, "SELECT id_departement, nama_departement FROM departement");
+                                    while ($d = mysqli_fetch_assoc($q)) {
+                                        $selected = ($d['id_departement'] == $row['id_departement']) ? 'selected' : '';
+                                        echo "<option value='{$d['id_departement']}' $selected>{$d['nama_departement']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-emerald-500">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Jabatan</label>
+                            <div class="relative">
+                                <select name="id_jabatan" class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 appearance-none shadow-sm cursor-pointer">
+                                    <?php
+                                    $q = mysqli_query($conn, "SELECT id_jabatan, nama_jabatan FROM jabatan");
+                                    while ($j = mysqli_fetch_assoc($q)) {
+                                        $selected = ($j['id_jabatan'] == $row['id_jabatan']) ? 'selected' : '';
+                                        echo "<option value='{$j['id_jabatan']}' $selected>{$j['nama_jabatan']}</option>";
+                                    }
+                                    ?>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-emerald-500">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Status</label>
+                            <div class="relative">
+                                <select name="status" class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 appearance-none shadow-sm cursor-pointer">
+                                    <option value="aktif" <?= ($row['status'] == 'aktif') ? 'selected' : ''; ?>>Aktif</option>
+                                    <option value="nonaktif" <?= ($row['status'] == 'nonaktif') ? 'selected' : ''; ?>>Non-Aktif</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-emerald-500">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                         <div>
+                            <label class="block text-xs font-bold text-pastel-label mb-2 uppercase">Tanggal Masuk</label>
+                            <input type="date" name="tanggal_masuk" value="<?= $row['tanggal_masuk']; ?>" 
+                                   class="form-input w-full px-4 py-3 rounded-lg bg-white border border-emerald-300 focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 outline-none text-sm font-medium text-emerald-950 shadow-sm">
+                        </div>
                     </div>
                 </div>
 
-                <!-- Tombol Submit -->
-                <div class="flex justify-end gap-4">
-                    <a href="list.php" class="px-6 py-3 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm hover:bg-gray-50 transition-all">
-                        Batal
+                <div class="mb-10">
+                    <div class="flex items-center gap-3 mb-6 border-b border-emerald-100 pb-3">
+                         <div class="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        </div>
+                        <h3 class="text-md font-bold text-emerald-800 uppercase tracking-wider">Dokumen Pendukung</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 rounded-xl border border-emerald-200 bg-white shadow-sm hover:border-emerald-400 transition-colors">
+                            <label class="block text-xs font-bold text-pastel-label mb-3 uppercase flex justify-between">
+                                <span>Scan KTP</span>
+                                <?php if(!empty($row['photo_ktp'])): ?>
+                                    <span class="text-emerald-500 font-normal normal-case text-[10px] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">File ada</span>
+                                <?php endif; ?>
+                            </label>
+                            <input type="file" name="photo_ktp" class="block w-full text-sm text-gray-500"/>
+                             <?php if(!empty($row['photo_ktp'])): ?>
+                                <p class="text-[11px] text-gray-400 mt-2 truncate">Current: <?= $row['photo_ktp']; ?></p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="p-4 rounded-xl border border-emerald-200 bg-white shadow-sm hover:border-emerald-400 transition-colors">
+                            <label class="block text-xs font-bold text-pastel-label mb-3 uppercase flex justify-between">
+                                <span>Foto Profil</span>
+                                <?php if(!empty($row['foto_selfie'])): ?>
+                                    <span class="text-emerald-500 font-normal normal-case text-[10px] bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">File ada</span>
+                                <?php endif; ?>
+                            </label>
+                            <input type="file" name="foto_selfie" class="block w-full text-sm text-gray-500"/>
+                            <?php if(!empty($row['foto_selfie'])): ?>
+                                <p class="text-[11px] text-gray-400 mt-2 truncate">Current: <?= $row['foto_selfie']; ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-4 pt-4 border-t border-emerald-100">
+                    <a href="list.php" class="px-6 py-2.5 rounded-lg border-2 border-emerald-200 text-emerald-700 font-semibold text-sm hover:bg-emerald-50 hover:border-emerald-300 transition-all">
+                        Batalkan
                     </a>
-                    <button type="submit" name="ubah" class="px-8 py-3 rounded-xl bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-500/30 hover:bg-emerald-600 hover:scale-[1.02] transition-all">
-                        Simpan Perubahan
+                    <button type="submit" name="ubah" class="px-8 py-2.5 rounded-lg bg-emerald-600 text-white font-bold text-sm shadow-lg shadow-emerald-200 hover:bg-emerald-700 hover:shadow-emerald-300 transform hover:-translate-y-0.5 transition-all">
+                        Simpan Data
                     </button>
                 </div>
 
             </form>
+        </div>
+        
+        <div class="text-center mt-8 text-emerald-800/40 text-xs font-mono">
+            Sistem Kepegawaian v2.0 &bull; Secure Form
         </div>
     </div>
 

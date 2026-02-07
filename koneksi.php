@@ -5,6 +5,8 @@ $port="3306";
 $pass = "";
 $db   = "db_karyawan";
 
+// session_start();
+
 $conn = mysqli_connect($host, $user, $pass, $db, $port);
 
 if (!$conn) {

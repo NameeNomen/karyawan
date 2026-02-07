@@ -56,7 +56,7 @@ CREATE TABLE `karyawan` (
   `tanggal_lahir` date NOT NULL,
   `id_jabatan` int(11) NOT NULL,
   CONSTRAINT fk_karyawan_jabatan foreign key (id_jabatan) references jabatan(id_jabatan) on delete cascade on update cascade,
-  `status` enum(`aktif`,`nonaktif`) NOT NULL,
+  `status` enum('aktif',`nonaktif`) NOT NULL,
   `tanggal_masuk` date not null,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL
