@@ -40,6 +40,9 @@ tailwind.config = {
 </script>
 
 <style>
+    *{
+            /* text-transform:capitalize; */
+        }
     /* PATTERN BACKGROUND ESTETIK: GINGHAM (Kotak-kotak Pudar) */
     body {
         background-color: #ecfdf5;

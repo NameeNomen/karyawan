@@ -43,6 +43,9 @@ include "controller/editController.php";
     </script>
 
     <style>
+        *{
+            /* text-transform:capitalize; */
+        }
         /* Pola Grid Estetik Formal */
         .bg-pattern {
             background-color: #f0fdf4; /* Emerald 50 */

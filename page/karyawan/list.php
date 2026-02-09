@@ -38,6 +38,9 @@ include "controller/listController.php";
     </script>
 
     <style>
+        *{
+            text-transform:capitalize;
+        }
         /* HEADER PATTERN */
         .header-pattern {
             background-color: #C8E6C9; 

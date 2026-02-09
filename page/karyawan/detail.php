@@ -2,28 +2,6 @@
 // Pastikan path koneksi sudah benar sesuai struktur folder Anda
 include "../../koneksi.php";
 include "controller/detailController.php";
-
-// SEMENTARA: Uncomment baris di bawah ini untuk tes tampilan jika database belum connect
-/*
-$data = [
-    [
-        'id' => 1,
-        'nama_lengkap' => 'Nicholson Parker',
-        'nama_jabatan' => 'Senior Engineer',
-        'nama_divisi' => 'Engineering',
-        'no_hp' => '0812-3345-6310',
-        'foto_selfie' => 'foto_sample.jpg' 
-    ],
-    [
-        'id' => 2,
-        'nama_lengkap' => 'Siti Aminah',
-        'nama_jabatan' => 'Quality Control',
-        'nama_divisi' => 'QC Dept',
-        'no_hp' => '0857-7777-6666',
-        'foto_selfie' => '' 
-    ]
-];
-*/
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +22,7 @@ $data = [
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
+        
         :root {
             /* Palette Trijaya Professional */
             --primary-color: #064e3b;   /* Emerald Green Gelap */
@@ -62,6 +41,7 @@ $data = [
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            text-transform:capitalize;
         }
 
         body {
@@ -164,7 +144,7 @@ $data = [
             font-size: 14px;
             font-weight: 700;
             letter-spacing: 1.5px;
-            text-transform: uppercase;
+            text-transform: capitalize;
         }
 
         /* --- FOTO PROFIL --- */
@@ -211,7 +191,7 @@ $data = [
             font-size: 20px;
             font-weight: 900;
             color: var(--text-dark);
-            text-transform: uppercase;
+            text-transform: capitalize;
             margin-bottom: 4px;
             letter-spacing: 0.5px;
         }
@@ -220,7 +200,7 @@ $data = [
             font-size: 12px;
             font-weight: 500;
             color: var(--primary-color);
-            text-transform: uppercase;
+            text-transform: capitalize;
             letter-spacing: 1px;
             display: inline-block;
             padding-bottom: 5px;
@@ -268,7 +248,7 @@ $data = [
             font-size: 10px;
             color: var(--text-grey);
             font-weight: 500;
-            text-transform: uppercase;
+            text-transform: capitalize;
             margin-bottom: 1px;
         }
 
@@ -372,7 +352,7 @@ $data = [
 
                 $nama       = isset($row['nama_lengkap']) ? $row['nama_lengkap'] : 'Nama Karyawan';
                 $jabatan    = isset($row['nama_jabatan']) ? $row['nama_jabatan'] : 'Karyawan';
-                $divisi     = isset($row['nama_divisi']) ? $row['nama_divisi'] : '-'; 
+                $divisi     = isset($row['nama_departement']) ? $row['nama_departement'] : '-'; 
                 $hp         = isset($row['no_hp']) ? $row['no_hp'] : '-';
                 $foto       = isset($row['foto_selfie']) ? $row['foto_selfie'] : '';
                 
@@ -417,7 +397,7 @@ $data = [
                     <div class="info-item">
                         <div class="info-icon-box"><i class="fas fa-id-card"></i></div>
                         <div class="info-content">
-                            <span class="info-label">ID Number</span>
+                            <span class="info-label">NIP</span>
                             <span class="info-value"><?= $nip; ?></span>
                         </div>
                     </div>
@@ -425,7 +405,7 @@ $data = [
                     <div class="info-item">
                         <div class="info-icon-box"><i class="fas fa-layer-group"></i></div>
                         <div class="info-content">
-                            <span class="info-label">Division</span>
+                            <span class="info-label">Divisi</span>
                             <span class="info-value"><?= htmlspecialchars($divisi); ?></span>
                         </div>
                     </div>
@@ -433,7 +413,7 @@ $data = [
                     <div class="info-item">
                         <div class="info-icon-box"><i class="fas fa-phone-alt"></i></div>
                         <div class="info-content">
-                            <span class="info-label">Phone</span>
+                            <span class="info-label">No.Telp</span>
                             <span class="info-value"><?= htmlspecialchars($hp); ?></span>
                         </div>
                     </div>

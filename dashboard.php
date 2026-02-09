@@ -104,9 +104,9 @@ while($row = mysqli_fetch_assoc($q_chart_growth)) { $bulan_data[$row['bulan'] - 
             <a href="dashboard.php" class="flex items-center gap-3 px-4 py-3 bg-emerald-50 border border-emerald-100 text-emerald-800 rounded-xl font-bold transition-all shadow-sm">
                 <i class="ph-fill ph-squares-four text-xl text-emerald-600"></i> Dashboard
             </a>
-            <a href="page/karyawan/list.php" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-100 border border-transparent rounded-xl font-medium transition-all group">
+            <!-- <a href="page/karyawan/list.php" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-100 border border-transparent rounded-xl font-medium transition-all group">
                 <i class="ph-bold ph-users text-xl group-hover:scale-105 transition-transform text-gray-400 group-hover:text-emerald-500"></i> Data Karyawan
-            </a>
+            </a> -->
             <a href="page/jabatan/list.php" class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-100 border border-transparent rounded-xl font-medium transition-all group">
                 <i class="ph-bold ph-briefcase text-xl group-hover:scale-105 transition-transform text-gray-400 group-hover:text-emerald-500"></i> Data Jabatan
             </a>
@@ -238,7 +238,7 @@ while($row = mysqli_fetch_assoc($q_chart_growth)) { $bulan_data[$row['bulan'] - 
                             <thead>
                                 <tr class="text-xs text-emerald-900/50 border-b border-emerald-100">
                                     <th class="py-3 font-semibold uppercase pl-2 w-[35%]">Nama Pegawai</th>
-                                    <th class="py-3 font-semibold uppercase w-[25%]">NIPD</th>
+                                    <th class="py-3 font-semibold uppercase w-[25%]">NIP</th>
                                     <th class="py-3 font-semibold uppercase w-[25%]">Tanggal Masuk</th>
                                     <th class="py-3 font-semibold uppercase text-right pr-2 w-[15%]">Status</th>
                                 </tr>
