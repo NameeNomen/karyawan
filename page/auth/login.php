@@ -32,6 +32,6 @@ if (isset($_SESSION['user'])) {
         </button>
     </form>
 </div>
-
+<script src="autoplay-plugin.js"></script>
 </body>
 </html>
